@@ -1,3 +1,6 @@
+// stack memory : parameters, local variables
+// static(data) memory : global object, static object
+
 #include <iostream>
 using namespace std;
 
@@ -5,22 +8,28 @@ class Circle
 {
 private:
     double radius;
+    static int count;  // static object
+
 public:
     // constructor
     Circle() {
-        cout << this << "¿ø °´Ã¼ »ý¼º (±âº» »ý¼ºÀÚ)\n";
+        cout << this << "ì› ê°ì²´ ìƒì„± (ê¸°ë³¸ ìƒì„±ìž)\n";
+        count++;
     }
     Circle(double r) {
-        cout << this << "¿ø °´Ã¼ »ý¼º (¸Å°³º¯¼ö »ý¼ºÀÚ)\n";
+        cout << this << "ì› ê°ì²´ ìƒì„± (ë§¤ê°œë³€ìˆ˜ ìƒì„±ìž)\n";
         radius = r;
+        count++;
     }
     Circle(const Circle& c) {
-        cout << this << "¿ø °´Ã¼ »ý¼º (º¹»ç »ý¼ºÀÚ)\n";
+        cout << this << "ì› ê°ì²´ ìƒì„± (ë³µì‚¬ ìƒì„±ìž)\n";
         radius = c.radius;
+        count++;
     }
 
     ~Circle() {
-        cout << this << "¿ø °´Ã¼ ¼Ò¸ê\n";
+        cout << this << "ì› ê°ì²´ ì†Œë©¸\n";
+        count--;
     }
     // inline member function
     double getRadius() const {
@@ -35,28 +44,43 @@ public:
         return (2 * PI * radius);
     }
     void setRadius(double value);  // inline O
+
+    static int getCount();
 };
+
+int Circle::count = 0;
+
+int Circle::getCount() {
+    return count;
+}
 
 inline void Circle::setRadius(double value)
 {
     radius = value;
 }
 
-Circle circle5;
+Circle circle5;  // global object
 
 void test() {
     Circle circle6(2.0);
+    cout << Circle::getCount() << "ê°œ\n";
 }
 
 int main()
 {
+    cout << Circle::getCount() << "ê°œ\n";
+
     Circle circle1;
     circle1.setRadius(10.0);
     cout << "Radius: " << circle1.getRadius() << endl;
     cout << "Area: " << circle1.getArea() << endl;
     cout << "Perimeter: " << circle1.getPerimeter() << endl << endl;
 
+    cout << Circle::getCount() << "ê°œ\n";
+
     test();
+
+    cout << Circle::getCount() << "ê°œ\n";
 
     Circle circle2;
     circle2.setRadius(20.0);
@@ -68,6 +92,8 @@ int main()
 
     Circle circle4(circle2);
     cout << "Radius: " << circle4.getRadius() << endl;
+
+    cout << Circle::getCount() << "ê°œ\n";
 
     return 0;
 }
