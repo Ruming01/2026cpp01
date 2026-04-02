@@ -4,10 +4,7 @@ using namespace std;
 
 int main() {
 
-	//int humans = 100;
-	//int ages[humans];
-	
-	int age;
+	int age, totalPrice = 0;
 	//int* a = &age;
 
 	int humans = 0;
@@ -21,13 +18,20 @@ int main() {
 		*(ages + i) = age;
 	}
 
+	int kid = 5000, adult = 10000, senior = 7000;
+
 	for (int i = 0; i < humans; i++) {
-		cout << *(ages + i) << "\n";
+		//cout << *(ages + i) << "\n";
+		age = *(ages + i);
+		if (age >= 65)
+			totalPrice = totalPrice + senior;
+		else if (age >= 19)
+			totalPrice = totalPrice + adult;
+		else
+			totalPrice = totalPrice + kid;
 	}
 
-	//cout << ages << '\n';
-	//cout << &humans << '\n';
-	//cout << &age << '\n';
+	cout << "ÃÑ ¿ä±Ý : " << totalPrice << "\n";
 
 	delete[] ages; //free memory
 
