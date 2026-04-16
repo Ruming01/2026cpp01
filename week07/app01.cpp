@@ -28,5 +28,10 @@ int main() {
 		cout << '\n';
 	}
 
+	for (int i = 0; i < 3; i++) {
+		delete[] arr[i];
+		arr[i] = nullptr;
+	}
+
 	return 0;
 }
