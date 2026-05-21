@@ -8,12 +8,21 @@ class Pokemon
 private:
     int hp;
 public:
+    Pokemon() : hp(1) {
+
+    }
+	Pokemon(int hp) : hp(hp) {
+        
+    }
+    Pokemon(const Pokemon& pokemon) : hp(pokemon.hp) {
+
+    }
     void set(int hp) {
         this->hp = hp;
-    };
+    }
     int getHp() const {
         return hp;
-    };
+    }
 };
 
 class Pikachu : public Pokemon // is a 관계로 Pokemon 클래스를 상속받는 Pikachu 클래스
@@ -21,35 +30,40 @@ class Pikachu : public Pokemon // is a 관계로 Pokemon 클래스를 상속받는 Pikachu 
 private:
     int electricAttack;
 public:
+    Pikachu() : Pokemon(), electricAttack(10) { //invocation
+    }
+	Pikachu(int hp, int electricAttack) : Pokemon(hp), electricAttack(electricAttack) {
+    }
+    Pikachu(const Pikachu& pikachu) : Pokemon(pikachu), electricAttack(pikachu.electricAttack) {
+    }
     void set(int hp)
     {
         Pokemon::set(hp);  // Delegation
-    };
+    }
     void set(int hp,int electricAttack)
     {
         Pokemon::set(hp);  // Delegation
         this->electricAttack = electricAttack;
-    };
+    }
     int getElectricAttack() const
     {
         return electricAttack;
-    };
+    }
 };
 
 int main()
 {
-    // Pokemon 객체 인스턴스화하고 사용
-    Pokemon Pokemon;
-    Pokemon.set(100);
-    cout << Pokemon.getHp();
-    cout << endl << endl;
+    //Pikachu pikachu; // 기본 생성자
+    //cout << pikachu.getHp() << endl;
+    //cout << pikachu.getElectricAttack() << endl;
 
-    // Pikachu 클래스 인스턴스화하고 사용
-    Pikachu Pikachu;
-    Pikachu.set(150);
-    cout << Pikachu.getHp() << endl;
-    Pikachu.set(200, 1000);
-    cout << Pikachu.getHp() << endl;
-    cout << Pikachu.getElectricAttack();
+    Pikachu pikachu(500, 4000); // 매개변수 생성자
+    cout << pikachu.getHp() << endl;
+    cout << pikachu.getElectricAttack() << endl;
+
+    Pikachu pikachu2(pikachu); //복사 생성자
+    cout << pikachu2.getHp() << endl;
+    cout << pikachu2.getElectricAttack() << endl;
+
     return 0;
 }
