@@ -8,7 +8,7 @@ class Pokemon
 private:
     int hp;
 public:
-    void setHp(int hp) {
+    void set(int hp) {
         this->hp = hp;
     };
     int getHp() const {
@@ -21,8 +21,13 @@ class Pikachu : public Pokemon // is a 관계로 Pokemon 클래스를 상속받는 Pikachu 
 private:
     int electricAttack;
 public:
-    void setElectricAttack(int electricAttack)
+    void set(int hp)
     {
+        Pokemon::set(hp);  // Delegation
+    };
+    void set(int hp,int electricAttack)
+    {
+        Pokemon::set(hp);  // Delegation
         this->electricAttack = electricAttack;
     };
     int getElectricAttack() const
@@ -35,14 +40,15 @@ int main()
 {
     // Pokemon 객체 인스턴스화하고 사용
     Pokemon Pokemon;
-    Pokemon.setHp(100);
+    Pokemon.set(100);
     cout << Pokemon.getHp();
     cout << endl << endl;
 
     // Pikachu 클래스 인스턴스화하고 사용
     Pikachu Pikachu;
-    Pikachu.setHp(150);
-    Pikachu.setElectricAttack(1000);
+    Pikachu.set(150);
+    cout << Pikachu.getHp() << endl;
+    Pikachu.set(200, 1000);
     cout << Pikachu.getHp() << endl;
     cout << Pikachu.getElectricAttack();
     return 0;
