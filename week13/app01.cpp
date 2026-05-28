@@ -1,7 +1,6 @@
 
-#include "pokemon.h"
 #include "pikachu.h"
-#include "pokemon.h"  // duplicated code
+#include "squirtle.h"
 
 
 int main()
@@ -9,6 +8,9 @@ int main()
     //Pikachu Pikachu;   // default
     //cout << Pikachu.getHp() << endl;
     //cout << Pikachu.getElectricAttack();
+
+    Squirtle squirtle(1000, 3000);
+    cout << squirtle.getWaterAttack() << endl;
 
     Pikachu pikachu(500, 4000);  // parameter
     cout << pikachu.getHp() << endl;
