@@ -1,7 +1,7 @@
 
 #include "pokemon.h"
 #include "pikachu.h"
-
+#include "pokemon.h"  // duplicated code
 
 
 int main()
