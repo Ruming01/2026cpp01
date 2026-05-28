@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-class Pokemon
+class Pokemon //final // 상속 불가
 {
 private:
     int hp;
